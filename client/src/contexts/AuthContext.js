@@ -1,7 +1,7 @@
 import React, {
     createContext, useState, useEffect, useContext
 } from 'react';
-import { loginWithEmailAndPassword, registerWithEmailAndPassword } from '../api/authAPI';
+import { loginWithEmailAndPassword, registerWithEmailAndPassword, getSavedUser, saveUser, removeSavedUser } from '../api/authAPI';
 
 
 const AuthContext = createContext({});
@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userToken, setUserToken] = useState(null);
     const [authLoading, setAuthLoading] = useState(false);
+    const [remindProcess, setRemindProcess] = useState(true);
 
     const login = async (email, password) => {
         setAuthLoading(true);
@@ -17,26 +18,41 @@ export const AuthProvider = ({ children }) => {
         if (response.user) {
             setUser(response.user);
             setUserToken(response.token);
-        }
-        else {
-            setUser(null);
-            setUserToken(null);
+            await saveUser(response.token, response.user);
         }
         setAuthLoading(false);
+        return response;
     }
 
     const registerUser = async (firstName, lastName, username, email, password) => {
         setAuthLoading(true);
         const response = await registerWithEmailAndPassword(firstName, lastName, username, email, password);
-        console.log(response)
         setAuthLoading(false);
+        return response;
+    }
+
+    const remindUser = async () => {
+        const { token, user } = await getSavedUser();
+        if (user && token) {
+            await setUser(user);
+            await setUserToken(token);
+        }
+        return (token && user);
+    }
+
+    const signOut = async () => {
+        await removeSavedUser();
+        await setUser(null);
+        await setUserToken(null);
     }
 
     useEffect(() => {
+        setRemindProcess(true);
+        remindUser().then(() => { setRemindProcess(false) });
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, userToken, authLoading, login, registerUser }}>
+        <AuthContext.Provider value={{ user, userToken, authLoading, remindProcess, login, registerUser, remindUser, signOut }}>
             {children}
         </AuthContext.Provider>
     );
