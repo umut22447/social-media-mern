@@ -16,8 +16,8 @@ export const AuthProvider = ({ children }) => {
         setAuthLoading(true);
         const response = await loginWithEmailAndPassword(email, password);
         if (response.user) {
-            setUser(response.user);
             setUserToken(response.token);
+            setUser(response.user);
             await saveUser(response.token, response.user);
         }
         setAuthLoading(false);
@@ -42,8 +42,8 @@ export const AuthProvider = ({ children }) => {
 
     const signOut = async () => {
         await removeSavedUser();
-        await setUser(null);
         await setUserToken(null);
+        await setUser(null);
     }
 
     useEffect(() => {

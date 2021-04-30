@@ -59,5 +59,16 @@ const login = async (req, res) => {
     res.header('auth_token', token).json({ token: token, user: user });
 }
 
+const getUsername = async (req, res) => {
+    const userID = req.params.userID;
+
+    //Get username
+    const { username } = await User.findOne({ _id: userID });
+    if (!username) return res.status(400).json({ errorMessage: 'Cannot found user.' });
+
+    res.json({ username });
+}
+
 module.exports.register = register;
 module.exports.login = login;
+module.exports.getUsername = getUsername;

@@ -38,7 +38,7 @@ const getPosts = async (req, res) => {
         res.json(posts);
     }
     catch (err) {
-        res.json({ message: err });
+        res.status(400).json({ errorMessage: err });
     }
 }
 

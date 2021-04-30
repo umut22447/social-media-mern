@@ -20,6 +20,10 @@ const postSchema = new mongoose.Schema({
     status: {
         type: Number,
         default: 1
+    },
+    creationDate: {
+        type: Date,
+        default: Date.now
     }
 })
 

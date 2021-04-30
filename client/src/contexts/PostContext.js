@@ -16,7 +16,7 @@ export const PostProvider = ({ children }) => {
     }
 
     const addNewPost = async (image, description) => {
-        newPost(userToken, image, description).then(console.log);
+        newPost(userToken, image, description).then(() => { getPosts() });
     }
 
     return (

@@ -2,9 +2,12 @@ import React, { useEffect } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useForm } from 'react-hook-form'
 import { usePost } from '../../contexts/PostContext';
+import Post from './Post';
+import './style.css';
+
 
 export default function PostList() {
-    const { signOut } = useAuth();
+    const { user, signOut } = useAuth();
     const { postList, addNewPost, getPosts } = usePost();
     const { register, handleSubmit } = useForm();
 
@@ -14,12 +17,13 @@ export default function PostList() {
     }
 
     useEffect(() => {
-        getPosts();
-    }, [])
+        if (user) {
+            getPosts();
+        }
+    }, [user])
 
     return (
-        <div>
-            {console.log(postList)}
+        <div className="postlist-container">
             <form onSubmit={handleSubmit(submitPost)}>
                 <div className="form-group">
                     <label>Image</label>
@@ -31,7 +35,7 @@ export default function PostList() {
                 </div>
                 <button type="submit">submit</button>
             </form>
-            {postList.map(post => <img style={{ width: 500, height: 500 }} src={"data:" + post.image.mimetype + ";base64," + post.image.buffer} key={post._id} />)}
+            {postList.map(post => <Post post={post} key={post._id} />)}
             <button onClick={signOut}>Sign Out</button>
         </div>
     )
