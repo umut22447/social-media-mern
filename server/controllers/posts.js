@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const { postValidation } = require('../validation');
 
+//Add new post
 const newPost = async (req, res) => {
     const { userID } = req;
     const { description } = JSON.parse(req.body['form-body']);
@@ -32,6 +33,7 @@ const newPost = async (req, res) => {
     }
 }
 
+//Sends all posts
 const getPosts = async (req, res) => {
     try {
         const posts = await Post.find();
@@ -42,5 +44,22 @@ const getPosts = async (req, res) => {
     }
 }
 
+//Update like list of post
+const updatePostLikeList = async (req, res) => {
+    const { userID } = req;
+    const { postID } = req.body;
+    try {
+        const { likedUsers } = await Post.findOne({ _id: postID })
+        const isLiked = likedUsers.includes(userID);
+        const newList = isLiked ? likedUsers.filter(id => id !== userID) : [...likedUsers, userID];
+        const updatedPost = await Post.updateOne({ _id: postID }, { $set: { likedUsers: newList } });
+        res.json({ message: "Success" });
+    }
+    catch (err) {
+        res.json({ errorMessage: err });
+    }
+}
+
 module.exports.newPost = newPost;
 module.exports.getPosts = getPosts;
+module.exports.updatePostLikeList = updatePostLikeList;

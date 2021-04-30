@@ -27,16 +27,19 @@ export default function PostList() {
             <form onSubmit={handleSubmit(submitPost)}>
                 <div className="form-group">
                     <label>Image</label>
+                    <br />
                     <input type="file" accept="image/png, image/jpeg" name="image" {...register("image")} required={true} />
                 </div>
                 <div className="form-group">
                     <label>Description</label>
                     <input name="description" type="text" className="form-control" {...register("description")} required={true} />
                 </div>
-                <button type="submit">submit</button>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10 }}>
+                    <button className="btn btn-outline-success" type="submit">Create a Post</button>
+                </div>
             </form>
             {postList.map(post => <Post post={post} key={post._id} />)}
-            <button onClick={signOut}>Sign Out</button>
+            <button className="btn btn-outline-danger mt-3" onClick={signOut}>Sign Out</button>
         </div>
     )
 }

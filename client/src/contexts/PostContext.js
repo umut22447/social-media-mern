@@ -1,7 +1,7 @@
 import React, {
     createContext, useState, useContext
 } from 'react';
-import { getPostList, newPost } from '../api/postAPI';
+import { getPostList, newPost, updatePostLikedUsers } from '../api/postAPI';
 import { useAuth } from './AuthContext';
 
 
@@ -19,8 +19,12 @@ export const PostProvider = ({ children }) => {
         newPost(userToken, image, description).then(() => { getPosts() });
     }
 
+    const likePost = async (postID) => {
+        updatePostLikedUsers(postID, userToken);
+    }
+
     return (
-        <PostContext.Provider value={{ postList, addNewPost, getPosts }}>
+        <PostContext.Provider value={{ postList, addNewPost, getPosts, likePost }}>
             {children}
         </PostContext.Provider>
     );

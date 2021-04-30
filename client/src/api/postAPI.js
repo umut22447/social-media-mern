@@ -22,3 +22,16 @@ module.exports.getPostList = async (token) => {
         }
     }).then(res => res.json()).catch(err => err);
 }
+
+module.exports.updatePostLikedUsers = async (postID, token) => {
+    return await fetch('http://localhost:9000/api/posts/like', {
+        method: 'POST',
+        headers: {
+            'auth-token': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            postID: postID
+        })
+    }).then(res => res.json()).catch(err => err);
+}
