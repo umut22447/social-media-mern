@@ -34,6 +34,18 @@ const userSchema = new mongoose.Schema({
     registerDate: {
         type: Date,
         default: Date.now
+    },
+    profilePicture: {
+        type: Object,
+        default: null
+    },
+    followers: {
+        type: Array,
+        default: []
+    },
+    follows: {
+        type: Array,
+        default: []
     }
 })
 

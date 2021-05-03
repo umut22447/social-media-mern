@@ -25,7 +25,7 @@ module.exports.registerWithEmailAndPassword = async (firstName, lastName, userna
 }
 
 module.exports.getUsernameByID = async (userID) => {
-    return await fetch('http://localhost:9000/api/auth/get-username/' + userID).then(res => res.json()).catch(err => err);
+    return await fetch('http://localhost:9000/api/user/get-username/' + userID).then(res => res.json()).catch(err => err);
 }
 
 
