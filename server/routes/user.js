@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../verifyToken');
-const { getUsername } = require('../controllers/user');
+var multer = require('multer');
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
+const { getUsername, followUser, getUsernameAndPicture, updateProfilePicture } = require('../controllers/user');
 
 router.get('/get-username/:userID', getUsername);
-router.post('/')
+router.get('/get-username-picture/:userID', getUsernameAndPicture);
+router.post('/follow', verifyToken, followUser);
+router.post('/update-profile-picture', upload.single('image'), verifyToken, updateProfilePicture);
 
 module.exports = router;

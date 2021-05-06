@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getUsernameByID } from '../../api/authAPI';
+import { getUsernameAndPictureByID } from '../../api/authAPI';
 import { useAuth } from '../../contexts/AuthContext';
 import { usePost } from '../../contexts/PostContext';
+import blankpp from '../../images/blankpp.png';
 import './style.css';
 
 export default function Post({ post }) {
@@ -9,6 +10,7 @@ export default function Post({ post }) {
     const { user } = useAuth();
     const { likePost } = usePost();
     const [username, setUsername] = useState('');
+    const [userPicture, setUserPicture] = useState(null);
     const [isPostLiked, setIsPostLiked] = useState(likedUsers.includes(user._id));
 
     const removeUserFromLikeList = () => {
@@ -30,15 +32,19 @@ export default function Post({ post }) {
     }
 
     useEffect(() => {
-        getUsernameByID(userID).then(result => {
+        getUsernameAndPictureByID(userID).then(result => {
             setUsername(result.username);
+            setUserPicture(result.userPicture);
         });
     }, [])
 
     return (
         <div className="post-container shadow mt-3">
-            <div className="post-section" style={{ justifyContent: 'space-between' }}>
-                <strong>{username}</strong>
+            <div className="post-header" style={{ justifyContent: 'space-between' }}>
+                <div>
+                    <img className="profile-picture-small" alt="profile" src={userPicture ? ("data:" + userPicture.mimetype + ";base64," + userPicture.buffer) : blankpp} />
+                    <strong>{username}</strong>
+                </div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fillRule="currentColor" className="bi bi-three-dots" viewBox="0 0 16 16">
                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                 </svg>

@@ -28,6 +28,22 @@ module.exports.getUsernameByID = async (userID) => {
     return await fetch('http://localhost:9000/api/user/get-username/' + userID).then(res => res.json()).catch(err => err);
 }
 
+module.exports.getUsernameAndPictureByID = async (userID) => {
+    return await fetch('http://localhost:9000/api/user/get-username-picture/' + userID).then(res => res.json()).catch(err => err);
+}
+
+module.exports.updateProfilePicture = async (token, image) => {
+    var formData = new FormData();
+    formData.append('image', image[0]);
+    return await fetch('http://localhost:9000/api/user/update-profile-picture', {
+        method: 'POST',
+        headers: {
+            'auth-token': token
+        },
+        body: formData
+    }).then(res => res.json()).catch(err => err);
+}
+
 
 //---------------Fetch local events-----------------
 module.exports.getSavedUser = async () => {

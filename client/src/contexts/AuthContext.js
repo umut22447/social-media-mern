@@ -1,7 +1,7 @@
 import React, {
     createContext, useState, useEffect, useContext
 } from 'react';
-import { loginWithEmailAndPassword, registerWithEmailAndPassword, getSavedUser, saveUser, removeSavedUser } from '../api/authAPI';
+import { loginWithEmailAndPassword, registerWithEmailAndPassword, getSavedUser, saveUser, removeSavedUser, updateProfilePicture } from '../api/authAPI';
 
 
 const AuthContext = createContext({});
@@ -31,6 +31,10 @@ export const AuthProvider = ({ children }) => {
         return response;
     }
 
+    const changeProfilePicture = async (image) => {
+        updateProfilePicture(userToken, image);
+    }
+
     const remindUser = async () => {
         const { token, user } = await getSavedUser();
         if (user && token) {
@@ -52,7 +56,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, userToken, authLoading, remindProcess, login, registerUser, remindUser, signOut }}>
+        <AuthContext.Provider value={{ user, userToken, authLoading, remindProcess, login, registerUser, remindUser, signOut, changeProfilePicture }}>
             {children}
         </AuthContext.Provider>
     );

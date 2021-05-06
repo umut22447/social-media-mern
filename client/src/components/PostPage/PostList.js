@@ -7,13 +7,18 @@ import './style.css';
 
 
 export default function PostList() {
-    const { user, signOut } = useAuth();
+    const { user, changeProfilePicture, signOut } = useAuth();
     const { postList, addNewPost, getPosts } = usePost();
     const { register, handleSubmit } = useForm();
 
     const submitPost = data => {
         const { image, description } = data;
         addNewPost(image, description);
+    }
+
+    const submitProfilePicture = data => {
+        const { profilePicture } = data;
+        changeProfilePicture(profilePicture);
     }
 
     useEffect(() => {
@@ -36,6 +41,16 @@ export default function PostList() {
                 </div>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10 }}>
                     <button className="btn btn-outline-success" type="submit">Create a Post</button>
+                </div>
+            </form>
+            <form onSubmit={handleSubmit(submitProfilePicture)}>
+                <div className="form-group">
+                    <label>Profile Picture</label>
+                    <br />
+                    <input type="file" accept="image/png, image/jpeg" name="profilePicture" {...register("profilePicture")} required={true} />
+                </div>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10 }}>
+                    <button className="btn btn-outline-success" type="submit">Change Profile Picture</button>
                 </div>
             </form>
             {postList.map(post => <Post post={post} key={post._id} />)}
