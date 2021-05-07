@@ -32,6 +32,10 @@ module.exports.getUsernameAndPictureByID = async (userID) => {
     return await fetch('http://localhost:9000/api/user/get-username-picture/' + userID).then(res => res.json()).catch(err => err);
 }
 
+module.exports.getUserProfile = async (username) => {
+    return await fetch('http://localhost:9000/api/user/get-user-profile/' + username).then(res => res.json()).catch(err => err);
+}
+
 module.exports.updateProfilePicture = async (token, image) => {
     var formData = new FormData();
     formData.append('image', image[0]);

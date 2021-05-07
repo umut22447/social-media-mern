@@ -1,0 +1,28 @@
+.navbar-right{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+}
+
+.header-link{
+    width: fit-content;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    padding: 0px;
+    color: black;
+    margin-right: 25px;
+}
+
+.header-link img{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.dropdownzindex{
+    z-index: 1200 !important;
+  }

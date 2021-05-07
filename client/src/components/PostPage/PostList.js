@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form'
 import { usePost } from '../../contexts/PostContext';
 import Post from './Post';
 import './style.css';
+import Header from '../Header/Header';
 
 
 export default function PostList() {
-    const { user, changeProfilePicture, signOut } = useAuth();
+    const { user, changeProfilePicture } = useAuth();
     const { postList, addNewPost, getPosts } = usePost();
     const { register, handleSubmit } = useForm();
 
@@ -28,7 +29,17 @@ export default function PostList() {
     }, [user])
 
     return (
-        <div className="postlist-container">
+        <div>
+            <Header />
+            <div className="postlist-container">
+                {postList.map(post => <Post post={post} key={post._id} />)}
+            </div>
+        </div>
+    )
+}
+
+
+/*
             <form onSubmit={handleSubmit(submitPost)}>
                 <div className="form-group">
                     <label>Image</label>
@@ -53,8 +64,4 @@ export default function PostList() {
                     <button className="btn btn-outline-success" type="submit">Change Profile Picture</button>
                 </div>
             </form>
-            {postList.map(post => <Post post={post} key={post._id} />)}
-            <button className="btn btn-outline-danger mt-3" onClick={signOut}>Sign Out</button>
-        </div>
-    )
-}
+*/

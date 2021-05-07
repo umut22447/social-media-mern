@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Auth from './components/AuthPage/Auth';
 import PostList from "./components/PostPage/PostList";
+import Profile from "./components/ProfilePage/Profile";
 import { useAuth } from "./contexts/AuthContext";
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
       <Switch>
         <Route exact path="/posts">
           {remindProcess ? null : user ? <PostList /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/:username">
+          {remindProcess ? null : <Profile />}
         </Route>
         <Route exact path="/">
           {remindProcess ? null : user ? <Redirect to="/posts" /> : <Auth />}

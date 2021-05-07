@@ -44,6 +44,16 @@ const getPosts = async (req, res) => {
     }
 }
 
+const getPostsByUserID = async (req, res) => {
+    try {
+        const posts = await Post.find({ userID: req.params.userID });
+        res.json(posts);
+    }
+    catch (err) {
+        res.status(400).json({ errorMessage: err });
+    }
+}
+
 //Update like list of post
 const updatePostLikeList = async (req, res) => {
     const { userID } = req;
@@ -62,4 +72,5 @@ const updatePostLikeList = async (req, res) => {
 
 module.exports.newPost = newPost;
 module.exports.getPosts = getPosts;
+module.exports.getPostsByUserID = getPostsByUserID;
 module.exports.updatePostLikeList = updatePostLikeList;
