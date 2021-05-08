@@ -35,8 +35,11 @@ const newPost = async (req, res) => {
 
 //Sends all posts
 const getPosts = async (req, res) => {
+    const postByPage = 5;
+    const { page } = req.body;
+
     try {
-        const posts = await Post.find();
+        const posts = await Post.find({}, {}, { sort: { creationDate: -1 }, skip: parseInt(page) * postByPage, limit: postByPage });
         res.json(posts);
     }
     catch (err) {

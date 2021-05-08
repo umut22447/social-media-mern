@@ -14,12 +14,14 @@ module.exports.newPost = async (token, image, description) => {
     }).then(res => res.json()).catch(err => err);
 }
 
-module.exports.getPostList = async (token) => {
+module.exports.getPostList = async (token, page) => {
     return await fetch('http://localhost:9000/api/posts', {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'auth-token': token
-        }
+            'auth-token': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ page })
     }).then(res => res.json()).catch(err => err);
 }
 

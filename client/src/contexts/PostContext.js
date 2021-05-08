@@ -10,9 +10,16 @@ const PostContext = createContext({});
 export const PostProvider = ({ children }) => {
     const { userToken } = useAuth();
     const [postList, setPostList] = useState([]);
+    const [postLoading, setPostLoading] = useState(false);
 
-    const getPosts = async () => {
-        await getPostList(userToken).then(setPostList);
+    const getPosts = async (page) => {
+        setPostLoading(true);
+        await getPostList(userToken, page).then(list => {
+            setPostList([...postList, ...list]);
+        }).catch(err => {
+            alert('Connection Error');
+        });
+        setPostLoading(false);
     }
 
     const addNewPost = async (image, description) => {
@@ -24,7 +31,7 @@ export const PostProvider = ({ children }) => {
     }
 
     return (
-        <PostContext.Provider value={{ postList, addNewPost, getPosts, likePost }}>
+        <PostContext.Provider value={{ postList, postLoading, addNewPost, getPosts, likePost }}>
             {children}
         </PostContext.Provider>
     );

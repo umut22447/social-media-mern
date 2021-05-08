@@ -6,7 +6,7 @@ var multer = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 
-router.get('/', verifyToken, getPosts);
+router.post('/', verifyToken, getPosts);
 router.get('/:userID', getPostsByUserID);
 router.post('/new-post', upload.single('image'), verifyToken, newPost);
 router.post('/like', verifyToken, updatePostLikeList);
