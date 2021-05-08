@@ -12,15 +12,15 @@ export const PostProvider = ({ children }) => {
     const [postList, setPostList] = useState([]);
 
     const getPosts = async () => {
-        getPostList(userToken).then(setPostList);
+        await getPostList(userToken).then(setPostList);
     }
 
     const addNewPost = async (image, description) => {
-        newPost(userToken, image, description).then(() => { getPosts() });
+        await newPost(userToken, image, description);
     }
 
     const likePost = async (postID) => {
-        updatePostLikedUsers(postID, userToken);
+        await updatePostLikedUsers(postID, userToken);
     }
 
     return (

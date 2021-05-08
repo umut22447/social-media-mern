@@ -5,6 +5,7 @@ import {
   Redirect
 } from "react-router-dom";
 import Auth from './components/AuthPage/Auth';
+import NewPostPage from "./components/NewPostPage.js/NewPostPage";
 import PostList from "./components/PostPage/PostList";
 import Profile from "./components/ProfilePage/Profile";
 import { useAuth } from "./contexts/AuthContext";
@@ -17,6 +18,9 @@ function App() {
       <Switch>
         <Route exact path="/posts">
           {remindProcess ? null : user ? <PostList /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/new-post">
+          {remindProcess ? null : user ? <NewPostPage /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/:username">
           {remindProcess ? null : <Profile />}

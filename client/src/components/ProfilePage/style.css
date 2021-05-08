@@ -36,10 +36,42 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 30px;
 }
 
 .profile-post{
     width: 28%;
+    margin-bottom: 20px;
+}
+
+.username-text{
+    font-size: 30px;
+}
+
+.fullname-text{
+    color: #a0a0a0;
+}
+
+@media only screen and (max-width: 400px) {
+    .profile-post-list-container{
+        width: 100%;
+        justify-content: space-between;
+    }
+    .profile-post{
+        width: 30%;
+    }
+    .profile-image{
+        width: 90px;
+        height: 90px;
+    }
+    .username-text{
+        font-size: 15px;
+    }
+    .fullname-text{
+        font-size: 12px;
+    }
+    .follow-text{
+        font-size: 12;
+    }
 }

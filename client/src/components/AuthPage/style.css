@@ -53,3 +53,17 @@
         width: 80%;
     }
 }
+
+@media only screen and (max-width: 650px) {
+    .logo{
+        width: 250px;
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width: 290px) {
+    .logo{
+        width: 170px;
+        height: 90px;
+    }
+}
