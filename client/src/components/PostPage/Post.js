@@ -36,7 +36,7 @@ export default function Post({ post }) {
             setUsername(result.username);
             setUserPicture(result.userPicture);
         });
-    }, [])
+    }, [userID])
 
     return (
         <div className="post-container shadow mt-3">

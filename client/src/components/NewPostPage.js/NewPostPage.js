@@ -36,7 +36,7 @@ export default function NewPostPage() {
         <div>
             <Header />
             <form className="form-root" onSubmit={handleSubmit(submitPost)}>
-                {selectedImage ? <img src={selectedImage} className="selected-image-preview" /> : <strong style={{ marginBottom: 20 }}>No Image Selected</strong>}
+                {selectedImage ? <img src={selectedImage} className="selected-image-preview" alt="new-post" /> : <strong style={{ marginBottom: 20 }}>No Image Selected</strong>}
                 <div className="form-group">
                     <input type="file" accept="image/png, image/jpeg" name="image" {...register("image")} onChange={changeImagePreview} required={true} />
                 </div>

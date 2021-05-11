@@ -36,6 +36,17 @@ module.exports.getUserProfile = async (username) => {
     return await fetch('http://localhost:9000/api/user/get-user-profile/' + username).then(res => res.json()).catch(err => err);
 }
 
+module.exports.followUser = async (token, targetUserID) => {
+    return await fetch('http://localhost:9000/api/user/follow', {
+        method: 'POST',
+        headers: {
+            'auth-token': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ targetUserID })
+    }).then(res => res.json()).catch(err => err);
+}
+
 module.exports.updateProfilePicture = async (token, image) => {
     var formData = new FormData();
     formData.append('image', image[0]);

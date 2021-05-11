@@ -7,14 +7,9 @@ import Header from '../Header/Header';
 
 
 export default function PostList() {
-    const { user, changeProfilePicture } = useAuth();
+    const { user } = useAuth();
     const { postList, getPosts, postLoading } = usePost();
     const [page, setPage] = useState(0);
-
-    const submitProfilePicture = data => {
-        const { profilePicture } = data;
-        changeProfilePicture(profilePicture);
-    }
 
     useEffect(() => {
         if (user) {

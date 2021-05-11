@@ -40,6 +40,30 @@ const getUserProfile = async (req, res) => {
 const followUser = async (req, res) => {
     const { userID } = req;
     const { targetUserID } = req.body;
+
+    //Check the user exists
+    const user = await User.findOne({ _id: userID });
+    if (!user) return res.status(400).json({ errorMessage: 'Cannot find user.' });
+
+    //Check the target user exists
+    const targetUser = await User.findOne({ _id: targetUserID });
+    if (!targetUser) return res.status(400).json({ errorMessage: 'Cannot find user.' });
+
+    try {
+        //Check user is in already in follower list. If not then add user to the list.
+        const followerList = [...targetUser.followers];
+        const newList = followerList.includes(userID) ? followerList.filter(id => id !== userID) : [...followerList, userID];
+        await User.updateOne({ _id: targetUserID }, { $set: { followers: newList } });
+
+        //Set the follows list
+        const followsList = [...user.follows];
+        const newFollowsList = followsList.includes(targetUserID) ? followsList.filter(id => id !== targetUserID) : [...followsList, targetUserID];
+        await User.updateOne({ _id: userID }, { $set: { follows: newFollowsList } });
+        res.json({ message: 'Success' });
+    }
+    catch (err) {
+        res.status(400).json({ errorMessage: err });
+    }
 }
 
 const updateProfilePicture = async (req, res) => {
