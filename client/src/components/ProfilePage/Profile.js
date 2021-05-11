@@ -26,7 +26,7 @@ export default function Profile() {
         <div>
             <Header />
             <div className="profile-container">
-                {userProfile ? <ProfileHeader userProfile={userProfile} /> : null}
+                {userProfile ? <ProfileHeader userProfile={userProfile} /> : <h1 className="display-5">We cannot find the page you are looking for :(</h1>}
                 <div style={{ borderBottom: '1px solid #e0e0e0', width: '90%', marginTop: 20 }} />
                 {userProfile ? <ProfilePostList userProfile={userProfile} /> : null}
             </div>

@@ -53,13 +53,16 @@
     color: #a0a0a0;
 }
 
+@media only screen and (max-width: 550px) {
+    .profile-post{
+        width: 48%;
+    }
+}
+
 @media only screen and (max-width: 400px) {
     .profile-post-list-container{
         width: 100%;
         justify-content: space-between;
-    }
-    .profile-post{
-        width: 30%;
     }
     .profile-image{
         width: 90px;
@@ -73,5 +76,11 @@
     }
     .follow-text{
         font-size: 12;
+    }
+}
+
+@media only screen and (max-width: 250px) {
+    .profile-post{
+        width: 100%;
     }
 }
