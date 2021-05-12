@@ -1,7 +1,7 @@
 import React, {
     createContext, useState, useEffect, useContext
 } from 'react';
-import { loginWithEmailAndPassword, registerWithEmailAndPassword, getSavedUser, saveUser, removeSavedUser, updateProfilePicture } from '../api/authAPI';
+import { loginWithEmailAndPassword, registerWithEmailAndPassword, getSavedUser, saveUser, removeSavedUser, updateProfilePicture, getUserDetails } from '../api/authAPI';
 
 
 const AuthContext = createContext({});
@@ -31,17 +31,23 @@ export const AuthProvider = ({ children }) => {
         return response;
     }
 
+    const updateUserDetails = async () => {
+        await getUserDetails(userToken).then(setUser);
+    }
+
     const changeProfilePicture = async (image) => {
-        updateProfilePicture(userToken, image);
+        updateProfilePicture(userToken, image).then(() => {
+            updateUserDetails();
+        });
     }
 
     const remindUser = async () => {
-        const { token, user } = await getSavedUser();
-        if (user && token) {
-            await setUser(user);
+        const { token } = await getSavedUser();
+        if (token) {
             await setUserToken(token);
+            await getUserDetails(token).then(setUser);
         }
-        return (token && user);
+        return (token ? true : false);
     }
 
     const signOut = async () => {
@@ -56,7 +62,11 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, userToken, authLoading, remindProcess, login, registerUser, remindUser, signOut, changeProfilePicture }}>
+        <AuthContext.Provider value={{
+            user, userToken, authLoading, remindProcess,
+            login, registerUser, updateUserDetails, remindUser,
+            signOut, changeProfilePicture
+        }}>
             {children}
         </AuthContext.Provider>
     );

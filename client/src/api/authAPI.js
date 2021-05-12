@@ -24,6 +24,15 @@ module.exports.registerWithEmailAndPassword = async (firstName, lastName, userna
     }).then(res => res.json()).catch(err => err);
 }
 
+module.exports.getUserDetails = async (token) => {
+    return await fetch('http://localhost:9000/api/auth/get-user-details', {
+        method: 'GET',
+        headers: {
+            'auth-token': token
+        }
+    }).then(res => res.json()).catch(err => err);
+}
+
 module.exports.getUsernameByID = async (userID) => {
     return await fetch('http://localhost:9000/api/user/get-username/' + userID).then(res => res.json()).catch(err => err);
 }
@@ -63,8 +72,7 @@ module.exports.updateProfilePicture = async (token, image) => {
 //---------------Fetch local events-----------------
 module.exports.getSavedUser = async () => {
     return {
-        token: await localforage.getItem('token'),
-        user: await localforage.getItem('user')
+        token: await localforage.getItem('token')
     }
 }
 

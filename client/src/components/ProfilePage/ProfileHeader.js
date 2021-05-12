@@ -20,6 +20,7 @@ export default function ProfileHeader(props) {
             <div className="profile-info">
                 <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                     <strong className="username-text me-3">{username}</strong>
+                    {user && user._id === _id ? <a className="btn btn-outline-secondary align-self-center" href="/accounts/edit">Profile Settings</a> : null}
                     {user && user._id !== _id ? <button className="btn btn-outline-info align-self-center" onClick={handleFollow}>{followActive ? "Follow" : "Following"}</button> : null}
                 </div>
                 <p className="fullname-text">{firstName + " " + lastName}</p>

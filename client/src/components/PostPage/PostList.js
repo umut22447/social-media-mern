@@ -31,18 +31,3 @@ export default function PostList() {
         </div>
     )
 }
-
-
-/*
-
-            <form onSubmit={handleSubmit(submitProfilePicture)}>
-                <div className="form-group">
-                    <label>Profile Picture</label>
-                    <br />
-                    <input type="file" accept="image/png, image/jpeg" name="profilePicture" {...register("profilePicture")} required={true} />
-                </div>
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-                    <button className="btn btn-outline-success" type="submit">Change Profile Picture</button>
-                </div>
-            </form>
-*/
