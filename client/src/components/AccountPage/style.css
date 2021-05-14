@@ -34,3 +34,20 @@
     border-radius: 50%;
     margin-right: 20px;
 }
+
+@media only screen and (max-width: 450px) {
+    .edit-root{
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .accounts-main{
+        width: 100%;
+    }
+    .edit-root{
+        width: 100%;
+        padding: 0px;
+    }
+}

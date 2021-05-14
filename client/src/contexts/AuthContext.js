@@ -1,7 +1,11 @@
 import React, {
     createContext, useState, useEffect, useContext
 } from 'react';
-import { loginWithEmailAndPassword, registerWithEmailAndPassword, getSavedUser, saveUser, removeSavedUser, updateProfilePicture, getUserDetails } from '../api/authAPI';
+import {
+    loginWithEmailAndPassword, registerWithEmailAndPassword,
+    getSavedUser, saveUser, removeSavedUser,
+    updateProfilePicture, getUserDetails, updateUser
+} from '../api/authAPI';
 
 
 const AuthContext = createContext({});
@@ -36,9 +40,19 @@ export const AuthProvider = ({ children }) => {
     }
 
     const changeProfilePicture = async (image) => {
-        updateProfilePicture(userToken, image).then(() => {
-            updateUserDetails();
-        });
+        setAuthLoading(true);
+        const response = await updateProfilePicture(userToken, image);
+        await updateUserDetails();
+        await setAuthLoading(false);
+        return response;
+    }
+
+    const updateUserData = async (data) => {
+        setAuthLoading(true);
+        const response = await updateUser(userToken, data);
+        await updateUserDetails();
+        await setAuthLoading(false);
+        return response;
     }
 
     const remindUser = async () => {
@@ -65,7 +79,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             user, userToken, authLoading, remindProcess,
             login, registerUser, updateUserDetails, remindUser,
-            signOut, changeProfilePicture
+            signOut, changeProfilePicture, updateUserData
         }}>
             {children}
         </AuthContext.Provider>

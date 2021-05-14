@@ -68,6 +68,17 @@ module.exports.updateProfilePicture = async (token, image) => {
     }).then(res => res.json()).catch(err => err);
 }
 
+module.exports.updateUser = async (token, updatedData) => {
+    return await fetch('http://localhost:9000/api/user/update', {
+        method: 'POST',
+        headers: {
+            'auth-token': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    }).then(res => res.json()).catch(err => err);
+}
+
 
 //---------------Fetch local events-----------------
 module.exports.getSavedUser = async () => {

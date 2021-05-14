@@ -80,8 +80,30 @@ const updateProfilePicture = async (req, res) => {
     }
 }
 
+const updateUser = async (req, res) => {
+    const { userID } = req;
+    const { firstName, lastName, username } = req.body;
+
+    //Check the user exists
+    const user = await User.findOne({ _id: userID });
+    if (!user) return res.status(400).json({ errorMessage: 'Cannot find user' });
+
+    //Check if other users has the updated username
+    const usernameExists = await User.findOne({ username: username });
+    if (usernameExists && userID != usernameExists._id) return res.status(400).json({ errorMessage: 'Username already exists' });
+
+    try {
+        await User.updateOne({ _id: userID }, { $set: req.body });
+        res.json({ message: "Success" });
+    }
+    catch (err) {
+        res.status(400).json({ errorMessage: err });
+    }
+}
+
 module.exports.getUsername = getUsername;
 module.exports.followUser = followUser;
 module.exports.updateProfilePicture = updateProfilePicture;
 module.exports.getUsernameAndPicture = getUsernameAndPicture;
 module.exports.getUserProfile = getUserProfile;
+module.exports.updateUser = updateUser;
