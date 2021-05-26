@@ -7,6 +7,7 @@ import {
 import AccountsMain from "./components/AccountPage/AccountsMain";
 import Auth from './components/AuthPage/Auth';
 import NewPostPage from "./components/NewPostPage.js/NewPostPage";
+import PostDetail from "./components/PostPage/PostDetail";
 import PostList from "./components/PostPage/PostList";
 import Profile from "./components/ProfilePage/Profile";
 import { useAuth } from "./contexts/AuthContext";
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route exact path="/new-post">
           {remindProcess ? null : user ? <NewPostPage /> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/p/:postID">
+          {remindProcess ? null : <PostDetail />}
         </Route>
         <Route exact path="/accounts/:page">
           {remindProcess ? null : <AccountsMain />}

@@ -47,6 +47,20 @@ const getPosts = async (req, res) => {
     }
 }
 
+//Get post by id
+const getPostByID = async (req, res) => {
+    const postID = req.params.postID;
+
+    try {
+        const post = await Post.findOne({ _id: postID });
+        res.json(post);
+    }
+    catch (err) {
+        res.status(400).json({ errorMessage: err })
+    }
+}
+
+//Get user posts
 const getPostsByUserID = async (req, res) => {
     try {
         const posts = await Post.find({ userID: req.params.userID });
@@ -77,3 +91,4 @@ module.exports.newPost = newPost;
 module.exports.getPosts = getPosts;
 module.exports.getPostsByUserID = getPostsByUserID;
 module.exports.updatePostLikeList = updatePostLikeList;
+module.exports.getPostByID = getPostByID;

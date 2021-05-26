@@ -53,6 +53,16 @@
     color: #a0a0a0;
 }
 
+@media only screen and (max-width: 768px) {
+    .profile-post-list-container{
+        width: 90%;
+    }
+    .profile-post{
+        width: 45%;
+        margin-bottom: 20px;
+    }
+}
+
 @media only screen and (max-width: 550px) {
     .profile-post{
         width: 48%;
@@ -62,7 +72,10 @@
 @media only screen and (max-width: 400px) {
     .profile-post-list-container{
         width: 100%;
-        justify-content: space-between;
+        padding: 0px;
+    }
+    .profile-post{
+        width: 100%;
     }
     .profile-image{
         width: 90px;
@@ -71,16 +84,16 @@
     .username-text{
         font-size: 15px;
     }
+    .profile-settings-text{
+        font-size: 12px;
+    }
+    .follow-text{
+        font-size: 12px;
+    }
     .fullname-text{
         font-size: 12px;
     }
     .follow-text{
         font-size: 12;
-    }
-}
-
-@media only screen and (max-width: 250px) {
-    .profile-post{
-        width: 100%;
     }
 }

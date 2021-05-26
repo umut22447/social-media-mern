@@ -17,6 +17,43 @@
     border-radius: 5px;
 }
 
+.post-detail-container{
+    width: 930px;
+    min-height: 450px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+}
+
+.separator{
+    width: 100%;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.post-detail-section1{
+    width: 70%;
+    max-height: 600px;
+}
+
+.post-detail-section2{
+    width: 30%;
+    position: relative;
+    min-height: 450px;
+    background-color: white;
+    border-left: 1px solid #d0d0d0;
+}
+
+.post-comment-container{
+}
+
+.post-detail-bottom{
+    position: absolute;
+    bottom: 0px;
+}
+
 .post-header{
     width: 100%;
     display: flex;
@@ -38,7 +75,6 @@
 
 .post-image{
     width: 100%;
-    height: 550px;
 }
 
 .post-button{
