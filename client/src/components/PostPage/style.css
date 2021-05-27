@@ -19,7 +19,8 @@
 }
 
 .commentlist-container{
-    width: 750px;
+    width: 100%;
+    max-width: 750px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -44,7 +45,8 @@
 }
 
 .post-detail-container{
-    width: 750px;
+    width: 100%;
+    max-width: 750px;
     min-height: 450px;
     display: flex;
     flex-direction: row;
@@ -117,8 +119,30 @@
     margin-right: 5px;
 }
 
+@media only screen and (max-width: 570px) {
+    .comment-input{
+        width: 85% !important;
+    }
+    
+    .comment-send-button{
+        width: 15%;
+        font-size: 14px;
+    }
+}
+
 @media only screen and (max-width: 450px) {
     .post-container{
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .comment-input{
+        width: 70% !important;
+    }
+    
+    .comment-send-button{
+        width: 30%;
+        font-size: 14px;
     }
 }

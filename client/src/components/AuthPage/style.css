@@ -55,13 +55,19 @@
 }
 
 @media only screen and (max-width: 650px) {
+    .form-container{
+        width: 90%;
+    }
     .logo{
         width: 250px;
         height: 150px;
     }
 }
 
-@media only screen and (max-width: 290px) {
+@media only screen and (max-width: 320px) {
+    .form-container{
+        width: 100%;
+    }
     .logo{
         width: 170px;
         height: 90px;

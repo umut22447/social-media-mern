@@ -21,7 +21,7 @@ export default function Comment(props) {
                 <img className="profile-picture-small" alt="profile" src={userPicture ? ("data:" + userPicture.mimetype + ";base64," + userPicture.buffer) : blankpp} />
                 <strong><a href={"/" + username} style={{ textDecoration: 'none', color: 'black' }}>{username}</a></strong>
             </div>
-            <p>{commentText}</p>
+            <p style={{ wordWrap: 'break-word' }}>{commentText}</p>
         </div>
     )
 }

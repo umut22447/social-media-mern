@@ -21,7 +21,6 @@ export default function PostDetail() {
 
     return (
         <div>
-            {console.log(post)}
             <Header />
             <div className="postlist-container">
                 {loading ? null : post ? <Post post={post} key={post._id} isDetail={true} /> : <h1 className="display-5">We cannot find the page you are looking for :(</h1>}
