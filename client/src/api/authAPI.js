@@ -1,8 +1,10 @@
 const localforage = require('localforage');
+const AUTH_API_URL = "http://localhost:9000/api/auth";
+const USER_API_URL = "http://localhost:9000/api/user";
 
 //---------------Fetch server events---------------
 module.exports.loginWithEmailAndPassword = async (email, password) => {
-    return await fetch('http://localhost:9000/api/auth/login', {
+    return await fetch(AUTH_API_URL + '/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -15,7 +17,7 @@ module.exports.loginWithEmailAndPassword = async (email, password) => {
 }
 
 module.exports.registerWithEmailAndPassword = async (firstName, lastName, username, email, password) => {
-    return await fetch('http://localhost:9000/api/auth/register', {
+    return await fetch(AUTH_API_URL + '/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +27,7 @@ module.exports.registerWithEmailAndPassword = async (firstName, lastName, userna
 }
 
 module.exports.getUserDetails = async (token) => {
-    return await fetch('http://localhost:9000/api/auth/get-user-details', {
+    return await fetch(AUTH_API_URL + '/get-user-details', {
         method: 'GET',
         headers: {
             'auth-token': token
@@ -34,19 +36,19 @@ module.exports.getUserDetails = async (token) => {
 }
 
 module.exports.getUsernameByID = async (userID) => {
-    return await fetch('http://localhost:9000/api/user/get-username/' + userID).then(res => res.json()).catch(err => err);
+    return await fetch(USER_API_URL + '/get-username/' + userID).then(res => res.json()).catch(err => err);
 }
 
 module.exports.getUsernameAndPictureByID = async (userID) => {
-    return await fetch('http://localhost:9000/api/user/get-username-picture/' + userID).then(res => res.json()).catch(err => err);
+    return await fetch(USER_API_URL + '/get-username-picture/' + userID).then(res => res.json()).catch(err => err);
 }
 
 module.exports.getUserProfile = async (username) => {
-    return await fetch('http://localhost:9000/api/user/get-user-profile/' + username).then(res => res.json()).catch(err => err);
+    return await fetch(USER_API_URL + '/get-user-profile/' + username).then(res => res.json()).catch(err => err);
 }
 
 module.exports.followUser = async (token, targetUserID) => {
-    return await fetch('http://localhost:9000/api/user/follow', {
+    return await fetch(USER_API_URL + '/follow', {
         method: 'POST',
         headers: {
             'auth-token': token,
@@ -59,7 +61,7 @@ module.exports.followUser = async (token, targetUserID) => {
 module.exports.updateProfilePicture = async (token, image) => {
     var formData = new FormData();
     formData.append('image', image[0]);
-    return await fetch('http://localhost:9000/api/user/update-profile-picture', {
+    return await fetch(USER_API_URL + '/update-profile-picture', {
         method: 'POST',
         headers: {
             'auth-token': token
@@ -69,7 +71,7 @@ module.exports.updateProfilePicture = async (token, image) => {
 }
 
 module.exports.updateUser = async (token, updatedData) => {
-    return await fetch('http://localhost:9000/api/user/update', {
+    return await fetch(USER_API_URL + '/update', {
         method: 'POST',
         headers: {
             'auth-token': token,

@@ -8,6 +8,7 @@ require('dotenv/config');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/posts');
+const commentRouter = require('./routes/comments');
 
 //Middlewares
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/posts', postRouter);
+app.use('/api/comments', commentRouter)
 
 //Routes
 app.get('/', (req, res) => {

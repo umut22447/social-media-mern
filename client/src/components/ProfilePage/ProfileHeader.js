@@ -7,7 +7,7 @@ import './style.css';
 export default function ProfileHeader(props) {
     const { _id, username, userPicture, followers, follows, firstName, lastName } = props.userProfile;
     const { user, userToken } = useAuth();
-    const [followActive, setFollowActive] = useState(!followers.includes(user._id));
+    const [followActive, setFollowActive] = useState(user && user._id ? !followers.includes(user._id) : false);
 
     const handleFollow = () => {
         followUser(userToken, _id);

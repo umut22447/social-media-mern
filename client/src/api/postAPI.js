@@ -1,3 +1,5 @@
+const POST_API_URL = "http://localhost:9000/api/posts";
+
 module.exports.newPost = async (token, image, description) => {
     var formData = new FormData();
     formData.append('image', image[0]);
@@ -5,7 +7,7 @@ module.exports.newPost = async (token, image, description) => {
         image,
         description
     }))
-    return await fetch('http://localhost:9000/api/posts/new-post', {
+    return await fetch(POST_API_URL + '/new-post', {
         method: 'POST',
         headers: {
             'auth-token': token
@@ -15,7 +17,7 @@ module.exports.newPost = async (token, image, description) => {
 }
 
 module.exports.getPostList = async (token, page) => {
-    return await fetch('http://localhost:9000/api/posts', {
+    return await fetch(POST_API_URL, {
         method: 'POST',
         headers: {
             'auth-token': token,
@@ -26,11 +28,11 @@ module.exports.getPostList = async (token, page) => {
 }
 
 module.exports.getPostsByUserID = async (userID) => {
-    return await fetch('http://localhost:9000/api/posts/' + userID).then(res => res.json()).catch(err => err);
+    return await fetch(POST_API_URL + '/' + userID).then(res => res.json()).catch(err => err);
 }
 
 module.exports.getPostByPostID = async (postID, token) => {
-    return await fetch('http://localhost:9000/api/posts/post/' + postID, {
+    return await fetch(POST_API_URL + '/post/' + postID, {
         method: 'GET',
         headers: {
             'auth-token': token
@@ -39,7 +41,7 @@ module.exports.getPostByPostID = async (postID, token) => {
 }
 
 module.exports.updatePostLikedUsers = async (postID, token) => {
-    return await fetch('http://localhost:9000/api/posts/like', {
+    return await fetch(POST_API_URL + '/like', {
         method: 'POST',
         headers: {
             'auth-token': token,
