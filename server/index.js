@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
+const PORT = process.env.PORT || 9000;
 
 //Import routes
 const authRouter = require('./routes/auth');
@@ -33,4 +34,11 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedT
     }
 });
 
-app.listen(process.env.PORT);
+app.listen(PORT, err => {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        console.log(`Listening on port ${PORT}`);
+    }
+})
