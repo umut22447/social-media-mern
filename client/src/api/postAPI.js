@@ -1,4 +1,4 @@
-const POST_API_URL = "http://localhost:9000/api/posts";
+const POST_API_URL = "https://umern-api.herokuapp.com/api/posts";
 
 module.exports.newPost = async (token, image, description) => {
     var formData = new FormData();

@@ -1,6 +1,6 @@
 const localforage = require('localforage');
-const AUTH_API_URL = "http://localhost:9000/api/auth";
-const USER_API_URL = "http://localhost:9000/api/user";
+const AUTH_API_URL = "https://umern-api.herokuapp.com/api/auth";
+const USER_API_URL = "https://umern-api.herokuapp.com/api/user";
 
 //---------------Fetch server events---------------
 module.exports.loginWithEmailAndPassword = async (email, password) => {

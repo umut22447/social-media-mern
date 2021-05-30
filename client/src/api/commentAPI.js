@@ -1,4 +1,4 @@
-const COMMENT_API_URL = "http://localhost:9000/api/comments";
+const COMMENT_API_URL = "https://umern-api.herokuapp.com/api/comments";
 
 module.exports.getComments = async (postID) => {
     return await fetch(COMMENT_API_URL + "/get-comments/" + postID).then(res => res.json()).catch(err => err);
